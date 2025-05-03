@@ -1,4 +1,3 @@
-ademcan
 PHP API ve React ile Todo Uygulaması Case Çalışması
 Proje Tanımı
 Bu case çalışması, yazılım geliştirme becerilerinizi kapsamlı bir şekilde değerlendirmek amacıyla tasarlanmıştır. Sizden, modern web geliştirme prensiplerini ve iyi kod yazma pratiklerini uygulayarak tam işlevsel bir Todo Uygulaması geliştirmeniz beklenmektedir. Proje, back-end için PHP ile geliştirilmiş bir RESTful API ve front-end için React.js ile oluşturulmuş bir kullanıcı arayüzünden oluşacaktır.
