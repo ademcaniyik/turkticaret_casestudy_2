@@ -2,5 +2,5 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/acd1f4ftwarecom/acdisoftware.online/turkticaret
-    - cd $DEPLOYPATH
-    - /usr/local/cpanel/bin/git pull origin main
+    - /bin/cp -R * $DEPLOYPATH
+    
