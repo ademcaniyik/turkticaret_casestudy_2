@@ -1,5 +1,6 @@
+---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/acd1f4ftwarecom/repositories/turkticaret_casestudy_2
+    - export DEPLOYPATH=/home/acd1f4ftwarecom/acdisoftware.online/turkticaret
     - cd $DEPLOYPATH
-    - git pull https://github.com/ademcaniyik/turkticaret_casestudy_2.git main
+    - /usr/local/cpanel/bin/git pull origin main
