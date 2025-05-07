@@ -1,9 +1,39 @@
+!! MEVCUT KLASÖR YAPISINI İNCELE VE DAHA SONRASINDA İŞLEMLERE BAŞLA 
+SADECE BACKEND TARAFINDA İSTEDİKLERİMİ YAP
+
+APİ UÇ NOKTALARI
+Kategori İşlemleri
+– GET /api/categories - Tüm kategorileri listele
+– GET /api/categories/{id} - Belirli bir kategoriyi getir
+– POST /api/categories - Yeni bir kategori oluştur
+– PUT /api/categories/{id} - Mevcut bir kategoriyi güncelle
+– DELETE /api/categories/{id} - Bir kategoriyi sil
+– GET /api/categories/{id}/todos - Belirli bir kategoriye ait todo’ları listele
+
+Todo İşlemleri
+– GET /api/todos - Tüm todo’ları listele (sayfalama desteği ile)
+• Query parametreleri:
+– page: Sayfa numarası (varsayılan: 1)
+– limit: Sayfa başına kayıt sayısı (varsayılan: 10, maksimum: 50)
+– sort: Sıralama alanı (örn. ‘created_at’, ‘due_date’, ‘priority’)
+– order: Sıralama yönü (‘asc’ veya ‘desc’)
+– status: Filtre için durum
+– priority: Filtre için öncelik
+– GET /api/todos/{id} - Belirli bir todo’yu getir
+– POST /api/todos - Yeni bir todo oluştur
+– PUT /api/todos/{id} - Mevcut bir todo’yu güncelle
+– PATCH /api/todos/{id}/status - Sadece todo durumunu güncelle
+– DELETE /api/todos/{id} - Bir todo’yu sil (soft delete)
+– GET /api/todos/search - Todo’ları başlık veya açıklamaya göre ara
+• Query parametresi: q: Arama terimi
+
+
+
+
 
 3.	Backend İpuçları
 –	Pure PHP Kullanıyorsanız:
 •	Kendi routing mekanizmanızı oluşturun (URI path’lerini controller metodlarına bağlayan)
-•	Temiz bir klasör yapısı oluşturun (Controllers, Models, Services vb.)
-•	PDO veya mysqli kullanarak güvenli veritabanı işlemleri yapın
 •	Cross-site scripting (XSS) ve SQL injection’a karşı önlemler alın
 •	JSON yanıtlarını oluşturmak için helper fonksiyonları yazın
 
@@ -12,14 +42,13 @@
 Teknik Gereksinimler
 Back-end (PHP API) Detaylı Gereksinimleri
 1. Veritabanı Tasarımı ve Yönetimi
-•	Veritabanı: MySQL 8.0+ veya MariaDB 10.5+
+config/turkticaret.sql dosyasında şuanki veritabanı var
 •	ORM Kullanımı: Tercihen Eloquent veya Doctrine
 •	Migrasyon Scriptleri: Veritabanı şemasını oluşturmak için migrasyon dosyaları
 •	Seed Data: Test için örnek veriler içeren seed dosyaları
 
 2. RESTful API Tasarımı
 PHP Gereksinimleri: PHP 8.1+ kullanmanız beklenmektedir. Aşağıdaki seçeneklerden birini tercih edebilirsiniz:
-1.	Pure PHP ile Geliştirme: Framework kullanmadan, kendi MVC yapınızı oluşturabilirsiniz
 –	OOP prensiplerini uygulamanız beklenmektedir
 –	Sınıf autoloading için PSR-4 standardı kullanılmalıdır
 –	Composer kullanımı tavsiye edilir (dependency management için)
@@ -68,6 +97,7 @@ PHP Gereksinimleri: PHP 8.1+ kullanmanız beklenmektedir. Aşağıdaki seçenekl
 –	Input sanitization ve validation
 –	Rate limiting
 –	XSS ve CSRF koruması
+
 4. Kod Organizasyonu ve Mimari
 •	Repository Pattern: Veritabanı işlemleri için repositoryler
 •	Service Layer: İş mantığı için servis sınıfları
@@ -85,30 +115,22 @@ Bonus Özellikler (İsteğe Bağlı)
 –	JWT tabanlı kimlik doğrulama
 –	Role-based yetkilendirme (admin, normal kullanıcı)
 –	Her kullanıcının kendi todo’larını görmesi
-2.	Gerçek Zamanlı Güncellemeler
-–	WebSocket ile gerçek zamanlı güncellemeler
-–	Birden fazla kullanıcı aynı todo üzerinde çalışırken senkronizasyon
+
+
 3.	Offline Modu
 –	Service Workers ile çevrimdışı çalışma desteği
 –	IndexedDB ile yerel veri depolama
 –	Çevrimiçi olunduğunda otomatik senkronizasyon
-4.	İleri Düzey UI Özellikleri
-–	Sürükle ve bırak ile durum değiştirme (Kanban board)
-–	Todo’lar için etiketler ve renkli işaretler
-–	Markdown desteği ile zengin metin formatı
-–	Dosya ekleri (API’de gerekli değişikliklerle)
-5.	Progressive Web App (PWA)
-–	Ana ekrana eklenebilir
-–	Push bildirimleri
-–	Splash screen ve app icons
+
 6.	Kapsamlı Test
 –	Unit testler (PHPUnit ve Jest/React Testing Library)
 –	API entegrasyon testleri
 –	End-to-end testler (Cypress veya Playwright)
 –	Test coverage raporları
-7.	CI/CD Pipeline
-–	GitHub Actions veya GitLab CI ile otomatik test ve dağıtım
-–	Docker entegrasyonu
+
+
+
+
 Örnek API İstek ve Yanıtları
 1. Tüm Todo’ları Listeleme
 İstek:
