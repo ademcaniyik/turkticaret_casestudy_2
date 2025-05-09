@@ -89,7 +89,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"title\": \"Rapor hazırla\",\n    \"description\": \"Haftalık raporu hazırla ve yöneticiye gönder\",\n    \"status\": \"pending\",\n    \"priority\": \"high\",\n    \"due_date\": \"2025-05-10\",\n    \"category_ids\": [1, 2]\n}"
+                            "raw": "{\"title\": \"Rapor hazırla\",\"description\": \"Haftalık raporu hazırla ve yöneticiye gönder\",\"status\": \"pending\",\"priority\": \"high\",\"due_date\": \"2025-05-10\",\"category_ids\": [1, 2]}"
                         },
                         "url": {
                             "raw": "https://acdisoftware.com.tr/turkticaret/public/todos",
@@ -119,7 +119,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"title\": \"Rapor hazırla\",\n    \"description\": \"Haftalık raporu hazırla ve yöneticiye gönder\",\n    \"status\": \"in_progress\",\n    \"priority\": \"high\",\n    \"due_date\": \"2025-05-10\",\n    \"category_ids\": [1, 2]\n}"
+                            "raw": "{\"title\": \"Rapor hazırla\",\"description\": \"Haftalık raporu hazırla ve yöneticiye gönder\",\"status\": \"in_progress\",\"priority\": \"high\",\"due_date\": \"2025-05-10\",\"category_ids\": [1, 2]}"
                         },
                         "url": {
                             "raw": "https://acdisoftware.com.tr/turkticaret/public/todos/1",
@@ -150,7 +150,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"status\": \"completed\"\n}"
+                            "raw": "{\"status\": \"completed\"}"
                         },
                         "url": {
                             "raw": "https://acdisoftware.com.tr/turkticaret/public/todos/1/status",
@@ -162,7 +162,7 @@
                             ],
                             "path": [
                                 "turkticaret",
-                                "public",
+                                "post",
                                 "todos",
                                 "1",
                                 "status"
@@ -250,6 +250,89 @@
                     "name": "Kategori Detayı",
                     "request": {
                         "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "https://acdisoftware.com.tr/turkticaret/public/categories/1",
+                            "protocol": "https",
+                            "host": [
+                                "acdisoftware",
+                                "com",
+                                "tr"
+                            ],
+                            "path": [
+                                "turkticaret",
+                                "public",
+                                "categories",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Yeni Kategori Oluştur",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\": \"Yeni Kategori\",\"color\": \"#4A90E2\",\"description\": \"Bu kategori için açıklama\"}"
+                        },
+                        "url": {
+                            "raw": "https://acdisoftware.com.tr/turkticaret/public/categories",
+                            "protocol": "https",
+                            "host": [
+                                "acdisoftware",
+                                "com",
+                                "tr"
+                            ],
+                            "path": [
+                                "turkticaret",
+                                "public",
+                                "categories"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Kategori Güncelle",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\": \"Güncellenmiş Kategori\",\"color\": \"#F5A623\",\"description\": \"Bu kategori güncellendi\"}"
+                        },
+                        "url": {
+                            "raw": "https://acdisoftware.com.tr/turkticaret/public/categories/1",
+                            "protocol": "https",
+                            "host": [
+                                "acdisoftware",
+                                "com",
+                                "tr"
+                            ],
+                            "path": [
+                                "turkticaret",
+                                "public",
+                                "categories",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Kategori Sil",
+                    "request": {
+                        "method": "DELETE",
                         "header": [],
                         "url": {
                             "raw": "https://acdisoftware.com.tr/turkticaret/public/categories/1",
