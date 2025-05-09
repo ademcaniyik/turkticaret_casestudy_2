@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# Set base path
+RewriteBase /turkticaret/public
+
+# Handle Front Controller Pattern
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Allow HTTP methods
+RewriteCond %{REQUEST_METHOD} ^(POST|PUT|DELETE|PATCH) [NC]
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
