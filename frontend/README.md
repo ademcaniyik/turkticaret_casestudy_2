@@ -14,16 +14,19 @@ Bu klasör, Türk Ticaret Case Study projesinin React.js frontend uygulamasını
 ## Kurulum
 
 1. Gerekli paketleri yükleyin:
+
    ```bash
    npm install
    ```
 
 2. Geliştirme sunucusunu başlatın:
+
    ```bash
    npm start
    ```
 
 3. Production build oluşturun:
+
    ```bash
    npm run build
    ```
@@ -31,15 +34,19 @@ Bu klasör, Türk Ticaret Case Study projesinin React.js frontend uygulamasını
 ## Projeyi Çalıştırma
 
 1. Geliştirme ortamında:
+
    ```bash
    npm start
    ```
-   - Uygulama http://localhost:3000 adresinde çalışacaktır
+
+   - Uygulama [http://localhost:3000](http://localhost:3000) adresinde çalışacaktır
 
 2. Production ortamında:
+
    ```bash
    npm run build
    ```
+
    - Build edilmiş dosyalar `build` klasörüne kaydedilecektir
 
 ## Özellikler
@@ -53,15 +60,4 @@ Bu klasör, Türk Ticaret Case Study projesinin React.js frontend uygulamasını
 
 ## API Entegrasyonu
 
-Uygulama, backend API ile entegre çalışır. API endpoint'leri:
-
-- GET /api/todos - Tüm todo listesini getir
-- GET /api/todos/{id} - Belirli bir todoyu getir
-- POST /api/todos - Yeni todo ekle
-- PUT /api/todos/{id} - Todo güncelle
-- DELETE /api/todos/{id} - Todo sil
-- GET /api/todos/search - Todo ara
-
-## Lisans
-
-Bu proje MIT lisansı altında lisanslanmıştır. Detaylı bilgi için ana dizindeki LICENSE dosyasını inceleyin.
+Uygulama, backend API ile entegre çalışır.

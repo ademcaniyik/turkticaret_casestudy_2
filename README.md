@@ -15,25 +15,35 @@ turkticaret_case_2/
 ## Kurulum
 
 ### Frontend Kurulumu
+
 1. Frontend klasörüne gidin:
+
    ```bash
    cd frontend
    ```
+
 2. Gerekli paketleri yükleyin:
+
    ```bash
    npm install
    ```
+
 3. Geliştirme sunucusunu başlatın:
+
    ```bash
    npm start
    ```
 
 ### Backend Kurulumu
+
 1. Composer ile gerekli paketleri yükleyin:
+
    ```bash
    composer install
    ```
+
 2. .env dosyasını oluşturun ve gerekli ayarları yapın:
+
    ```
    DB_HOST=your_host
    DB_NAME=your_database
@@ -41,21 +51,23 @@ turkticaret_case_2/
    DB_PASS=your_password
    ```
 
-## Deployment
+3. Veritabanı tablolarını oluşturun:
 
-### GitHub Deployment
-1. Webhook.php dosyasını sunucuya yükleyin
-2. GitHub repository'nızda webhook oluşturun:
-   - Event: Push events
-   - Content type: application/json
-   - Secret: (opsiyonel)
+   ```bash
+   php artisan migrate
+   ```
 
 ### Sunucu Konfigürasyonu
+
 1. .htaccess dosyasını sunucuya yükleyin
+
 2. PHP ve Apache/LiteSpeed konfigürasyonlarını kontrol edin
+
 3. Sunucu izinlerini kontrol edin
 
 ## API Endpoints
+
+### Todo API
 
 - GET /api/todos - Tüm todo listesini getir
 - GET /api/todos/{id} - Belirli bir todoyu getir
@@ -63,7 +75,25 @@ turkticaret_case_2/
 - PUT /api/todos/{id} - Todo güncelle
 - DELETE /api/todos/{id} - Todo sil
 - GET /api/todos/search - Todo ara
+- PATCH /api/todos/{id}/status - Todo durumunu güncelle
+- PATCH /api/todos/{id}/priority - Todo önceliğini güncelle
+
+### Category API
+
+- GET /api/categories - Tüm kategorileri getir
+- GET /api/categories/{id} - Belirli bir kategoriyi getir
+- POST /api/categories - Yeni kategori ekle
+- PUT /api/categories/{id} - Kategori güncelle
+- DELETE /api/categories/{id} - Kategori sil
+- GET /api/categories/{id}/todos - Belirli kategoriye ait todoları getir
+
+### Authentication API
+
+- POST /api/auth/login - Kullanıcı girişi
+- POST /api/auth/register - Yeni kullanıcı kaydı
+- POST /api/auth/logout - Kullanıcı çıkış
+- GET /api/auth/me - Mevcut kullanıcı bilgisi
 
 ## Lisans
 
-Bu proje MIT lisansı altında lisanslanmıştır. Detaylı bilgi için LICENSE dosyasını inceleyin.
+Bu proje MIT lisansı altında lisanslanmıştır. Detaylı bilgi için ana dizindeki LICENSE dosyasını inceleyin.
