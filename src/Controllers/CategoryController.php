@@ -90,4 +90,16 @@ class CategoryController
         $category->delete();
         Response::json(null, 'success', 'Category deleted successfully');
     }
+
+    public function todos(array $params): void
+    {
+        $category = Category::find($params['id']);
+        if (!$category) {
+            Response::json(null, 'error', 'Category not found', 404);
+            return;
+        }
+
+        $todos = $category->getTodos();
+        Response::json($todos);
+    }
 }

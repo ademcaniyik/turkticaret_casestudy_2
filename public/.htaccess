@@ -1,0 +1,19 @@
+RewriteEngine On
+
+# Set base path
+RewriteBase /turkticaret
+
+# Handle Front Controller Pattern
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Force /api prefix for all API routes
+RewriteCond %{REQUEST_URI} !^/turkticaret/api/ [NC]
+RewriteCond %{REQUEST_URI} ^/turkticaret/(categories|todos)/ [NC,OR]
+RewriteCond %{REQUEST_URI} ^/turkticaret/(categories|todos)$ [NC]
+RewriteRule ^(.*)$ /turkticaret/api/$1 [L,R=301]
+
+# Handle HTTPS redirect
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]

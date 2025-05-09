@@ -1,0 +1,403 @@
+{
+	"info": {
+		"_postman_id": "b8e23f5a-4b2c-4e3e-8f5d-9c2e4f5c6d7e",
+		"name": "TürkTicaret API",
+		"description": "TürkTicaret Todo API Koleksiyonu",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Kategoriler",
+			"item": [
+				{
+					"name": "Tüm Kategorileri Listele",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://acdisoftware.com.tr/turkticaret/api/categories",
+							"protocol": "https",
+							"host": [
+								"acdisoftware",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkticaret",
+								"api",
+								"categories"
+							]
+						}
+					}
+				},
+				{
+					"name": "Kategori Detayı",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://acdisoftware.com.tr/turkticaret/api/categories/1",
+							"protocol": "https",
+							"host": [
+								"acdisoftware",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkticaret",
+								"api",
+								"categories",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Yeni Kategori Oluştur",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"İş\",\n    \"description\": \"İş ile ilgili görevler\",\n    \"color\": \"#FF5733\"\n}"
+						},
+						"url": {
+							"raw": "https://acdisoftware.com.tr/turkticaret/api/categories",
+							"protocol": "https",
+							"host": [
+								"acdisoftware",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkticaret",
+								"api",
+								"categories"
+							]
+						}
+					}
+				},
+				{
+					"name": "Kategori Güncelle",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"İş\",\n    \"description\": \"İş ile ilgili görevler\",\n    \"color\": \"#FF5733\"\n}"
+						},
+						"url": {
+							"raw": "https://acdisoftware.com.tr/turkticaret/api/categories/1",
+							"protocol": "https",
+							"host": [
+								"acdisoftware",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkticaret",
+								"api",
+								"categories",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Kategori Sil",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://acdisoftware.com.tr/turkticaret/api/categories/1",
+							"protocol": "https",
+							"host": [
+								"acdisoftware",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkticaret",
+								"api",
+								"categories",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Kategori Todo'ları",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://acdisoftware.com.tr/turkticaret/api/categories/1/todos",
+							"protocol": "https",
+							"host": [
+								"acdisoftware",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkticaret",
+								"api",
+								"categories",
+								"1",
+								"todos"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Todo'lar",
+			"item": [
+				{
+					"name": "Tüm Todo'ları Listele",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://acdisoftware.com.tr/turkticaret/api/todos?page=1&limit=10&sort=created_at&order=DESC&status=pending&priority=high",
+							"protocol": "https",
+							"host": [
+								"acdisoftware",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkticaret",
+								"api",
+								"todos"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "created_at"
+								},
+								{
+									"key": "order",
+									"value": "DESC"
+								},
+								{
+									"key": "status",
+									"value": "pending"
+								},
+								{
+									"key": "priority",
+									"value": "high"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Todo Detayı",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://acdisoftware.com.tr/turkticaret/api/todos/1",
+							"protocol": "https",
+							"host": [
+								"acdisoftware",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkticaret",
+								"api",
+								"todos",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Yeni Todo Oluştur",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Rapor hazırla\",\n    \"description\": \"Haftalık raporu hazırla ve yöneticiye gönder\",\n    \"status\": \"pending\",\n    \"priority\": \"high\",\n    \"due_date\": \"2025-05-10\",\n    \"category_ids\": [1, 2]\n}"
+						},
+						"url": {
+							"raw": "https://acdisoftware.com.tr/turkticaret/api/todos",
+							"protocol": "https",
+							"host": [
+								"acdisoftware",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkticaret",
+								"api",
+								"todos"
+							]
+						}
+					}
+				},
+				{
+					"name": "Todo Güncelle",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Rapor hazırla\",\n    \"description\": \"Haftalık raporu hazırla ve yöneticiye gönder\",\n    \"status\": \"in_progress\",\n    \"priority\": \"high\",\n    \"due_date\": \"2025-05-10\",\n    \"category_ids\": [1, 2]\n}"
+						},
+						"url": {
+							"raw": "https://acdisoftware.com.tr/turkticaret/api/todos/1",
+							"protocol": "https",
+							"host": [
+								"acdisoftware",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkticaret",
+								"api",
+								"todos",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Todo Durumu Güncelle",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"completed\"\n}"
+						},
+						"url": {
+							"raw": "https://acdisoftware.com.tr/turkticaret/api/todos/1/status",
+							"protocol": "https",
+							"host": [
+								"acdisoftware",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkticaret",
+								"api",
+								"todos",
+								"1",
+								"status"
+							]
+						}
+					}
+				},
+				{
+					"name": "Todo Sil",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://acdisoftware.com.tr/turkticaret/api/todos/1",
+							"protocol": "https",
+							"host": [
+								"acdisoftware",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkticaret",
+								"api",
+								"todos",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Todo Ara",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://acdisoftware.com.tr/turkticaret/api/todos/search?q=rapor",
+							"protocol": "https",
+							"host": [
+								"acdisoftware",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkticaret",
+								"api",
+								"todos",
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "rapor"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Todo İstatistikleri",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://acdisoftware.com.tr/turkticaret/api/todos/stats",
+							"protocol": "https",
+							"host": [
+								"acdisoftware",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkticaret",
+								"api",
+								"todos",
+								"stats"
+							]
+						}
+					}
+				}
+			]
+		}
+	]
+}

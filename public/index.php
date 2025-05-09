@@ -20,22 +20,26 @@ Database::setConfig([
     'password' => $_ENV['DB_PASS']
 ]);
 
+// Base path tanımı
+$basePath = '/turkticaret/api';
+
 // Todo rotaları
-Router::get('/api/todos', [TodoController::class, 'index']);
-Router::get('/api/todos/{id}', [TodoController::class, 'show']);
-Router::post('/api/todos', [TodoController::class, 'store']);
-Router::put('/api/todos/{id}', [TodoController::class, 'update']);
-Router::patch('/api/todos/{id}/status', [TodoController::class, 'updateStatus']);
-Router::delete('/api/todos/{id}', [TodoController::class, 'destroy']);
-Router::get('/api/todos/search', [TodoController::class, 'search']);
-Router::get('/api/stats/todos', [TodoController::class, 'stats']);
+Router::get($basePath . '/todos', [TodoController::class, 'index']);
+Router::get($basePath . '/todos/{id}', [TodoController::class, 'show']);
+Router::post($basePath . '/todos', [TodoController::class, 'store']);
+Router::put($basePath . '/todos/{id}', [TodoController::class, 'update']);
+Router::patch($basePath . '/todos/{id}/status', [TodoController::class, 'updateStatus']);
+Router::delete($basePath . '/todos/{id}', [TodoController::class, 'destroy']);
+Router::get($basePath . '/todos/search', [TodoController::class, 'search']);
+Router::get($basePath . '/stats/todos', [TodoController::class, 'stats']);
 
 // Kategori rotaları
-Router::get('/api/categories', [CategoryController::class, 'index']);
-Router::get('/api/categories/{id}', [CategoryController::class, 'show']);
-Router::post('/api/categories', [CategoryController::class, 'store']);
-Router::put('/api/categories/{id}', [CategoryController::class, 'update']);
-Router::delete('/api/categories/{id}', [CategoryController::class, 'destroy']);
+Router::get($basePath . '/categories', [CategoryController::class, 'index']);
+Router::get($basePath . '/categories/{id}', [CategoryController::class, 'show']);
+Router::post($basePath . '/categories', [CategoryController::class, 'store']);
+Router::put($basePath . '/categories/{id}', [CategoryController::class, 'update']);
+Router::delete($basePath . '/categories/{id}', [CategoryController::class, 'destroy']);
+Router::get($basePath . '/categories/{id}/todos', [CategoryController::class, 'todos']);
 
 // Rotaları işle
 Router::dispatch();
