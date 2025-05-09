@@ -11,13 +11,14 @@ foreach ($files as $file) {
 }
 
 // Dosya izinlerini kontrol et
-if (function_exists('posix_getpwuid')) {
-    $owner = posix_getpwuid(fileowner(__FILE__));
-    echo "\n=== Dosya İzinleri ===\n";
-    echo "Dosya Sahibi: " . $owner['name'] . "\n";
-    echo "Dosya Grubu: " . posix_getgrgid(filegroup(__FILE__))['name'] . "\n";
-    echo "Dosya İzinleri: " . substr(sprintf('%o', fileperms(__FILE__)), -4) . "\n";
-}
+$permissions = fileperms(__FILE__);
+$owner = fileowner(__FILE__);
+$group = filegroup(__FILE__);
+
+echo "\n=== Dosya İzinleri ===\n";
+echo "Dosya Sahibi: " . $owner . "\n";
+echo "Dosya Grubu: " . $group . "\n";
+echo "Dosya İzinleri: " . substr(sprintf('%o', $permissions), -4) . "\n";
 
 // PHP versiyonunu göster
 echo "\n=== PHP Bilgisi ===\n";
