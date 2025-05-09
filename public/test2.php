@@ -1,14 +1,11 @@
 <?php
 
 header('Content-Type: text/plain');
-echo "index.php çalışıyor\n";
+echo "Test2.php çalışıyor\n";
 echo "Server: " . $_SERVER['SERVER_SOFTWARE'] . "\n";
 echo "Request URI: " . $_SERVER['REQUEST_URI'] . "\n";
 echo "Document Root: " . $_SERVER['DOCUMENT_ROOT'] . "\n";
 echo "Current Directory: " . getcwd() . "\n";
 
-// Test if Router is working
-if (isset($_GET['test'])) {
-    echo "\n=== Router Test ===\n";
-    echo "Test parameter: " . $_GET['test'] . "\n";
-}
+// Show all PHP configuration
+phpinfo();
