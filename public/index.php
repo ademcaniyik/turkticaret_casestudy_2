@@ -21,7 +21,7 @@ Database::setConfig([
 ]);
 
 // Base path tanımı
-$basePath = '/turkticaret';
+$basePath = '/';
 
 // Todo rotaları
 Router::get($basePath . '/todos', [TodoController::class, 'index']);

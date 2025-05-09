@@ -1,7 +1,7 @@
 RewriteEngine On
 
 # Set base path
-RewriteBase /turkticaret
+RewriteBase /
 
 # Handle Front Controller Pattern
 RewriteCond %{REQUEST_FILENAME} !-d
