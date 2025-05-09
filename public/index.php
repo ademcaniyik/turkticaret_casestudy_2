@@ -8,6 +8,11 @@ use App\Helpers\Router;
 use App\Database\Database;
 use Dotenv\Dotenv;
 
+// Debug bilgilerini göster
+header('Content-Type: text/plain');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // .env dosyasını yükle
 $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
@@ -22,6 +27,11 @@ Database::setConfig([
 
 // Base path tanımı
 $basePath = '/turkticaret';
+
+// Debug bilgilerini göster
+echo "\n=== Debug Bilgileri ===\n";
+echo "Request URI: " . $_SERVER['REQUEST_URI'] . "\n";
+echo "Base Path: " . $basePath . "\n";
 
 // Todo rotaları
 Router::get($basePath . '/todos', [TodoController::class, 'index']);
