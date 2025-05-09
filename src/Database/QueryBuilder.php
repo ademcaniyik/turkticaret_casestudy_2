@@ -180,8 +180,6 @@ class QueryBuilder
             $values[] = $value;
         }
 
-        $values = array_merge($values, $this->params);
-
         $sql = sprintf(
             "UPDATE %s SET %s",
             $this->table,
@@ -190,11 +188,17 @@ class QueryBuilder
 
         if (!empty($this->where)) {
             $conditions = [];
+            $firstCondition = true;
             foreach ($this->where as $condition) {
-                [$column, $operator, $value] = $condition;
+                [$type, $column, $operator, $value] = $condition;
+                if (!$firstCondition) {
+                    $conditions[] = $type;
+                }
                 $conditions[] = "{$column} {$operator} ?";
+                $values[] = $value;
+                $firstCondition = false;
             }
-            $sql .= " WHERE " . implode(" AND ", $conditions);
+            $sql .= " WHERE " . implode(" ", $conditions);
         }
 
         $stmt = Database::getConnection()->prepare($sql);
@@ -206,18 +210,25 @@ class QueryBuilder
     public function delete(): int
     {
         $sql = sprintf("DELETE FROM %s", $this->table);
+        $values = [];
 
         if (!empty($this->where)) {
             $conditions = [];
+            $firstCondition = true;
             foreach ($this->where as $condition) {
-                [$column, $operator, $value] = $condition;
+                [$type, $column, $operator, $value] = $condition;
+                if (!$firstCondition) {
+                    $conditions[] = $type;
+                }
                 $conditions[] = "{$column} {$operator} ?";
+                $values[] = $value;
+                $firstCondition = false;
             }
-            $sql .= " WHERE " . implode(" AND ", $conditions);
+            $sql .= " WHERE " . implode(" ", $conditions);
         }
 
         $stmt = Database::getConnection()->prepare($sql);
-        $stmt->execute($this->params);
+        $stmt->execute($values);
 
         return $stmt->rowCount();
     }

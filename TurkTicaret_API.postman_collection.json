@@ -15,7 +15,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://acdisoftware.com.tr/turkticaret/api/categories",
+							"raw": "https://acdisoftware.com.tr/turkticaret/categories",
 							"protocol": "https",
 							"host": [
 								"acdisoftware",
@@ -36,7 +36,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://acdisoftware.com.tr/turkticaret/api/categories/1",
+							"raw": "https://acdisoftware.com.tr/turkticaret/categories/1",
 							"protocol": "https",
 							"host": [
 								"acdisoftware",
@@ -67,7 +67,7 @@
 							"raw": "{\n    \"name\": \"İş\",\n    \"description\": \"İş ile ilgili görevler\",\n    \"color\": \"#FF5733\"\n}"
 						},
 						"url": {
-							"raw": "https://acdisoftware.com.tr/turkticaret/api/categories",
+							"raw": "https://acdisoftware.com.tr/turkticaret/categories",
 							"protocol": "https",
 							"host": [
 								"acdisoftware",
@@ -97,7 +97,7 @@
 							"raw": "{\n    \"name\": \"İş\",\n    \"description\": \"İş ile ilgili görevler\",\n    \"color\": \"#FF5733\"\n}"
 						},
 						"url": {
-							"raw": "https://acdisoftware.com.tr/turkticaret/api/categories/1",
+							"raw": "https://acdisoftware.com.tr/turkticaret/categories/1",
 							"protocol": "https",
 							"host": [
 								"acdisoftware",
@@ -119,7 +119,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://acdisoftware.com.tr/turkticaret/api/categories/1",
+							"raw": "https://acdisoftware.com.tr/turkticaret/categories/1",
 							"protocol": "https",
 							"host": [
 								"acdisoftware",
@@ -141,7 +141,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://acdisoftware.com.tr/turkticaret/api/categories/1/todos",
+							"raw": "https://acdisoftware.com.tr/turkticaret/categories/1/todos",
 							"protocol": "https",
 							"host": [
 								"acdisoftware",
@@ -169,7 +169,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://acdisoftware.com.tr/turkticaret/api/todos?page=1&limit=10&sort=created_at&order=DESC&status=pending&priority=high",
+							"raw": "https://acdisoftware.com.tr/turkticaret/todos?page=1&limit=10&sort=created_at&order=DESC&status=pending&priority=high",
 							"protocol": "https",
 							"host": [
 								"acdisoftware",
@@ -216,7 +216,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://acdisoftware.com.tr/turkticaret/api/todos/1",
+							"raw": "https://acdisoftware.com.tr/turkticaret/todos/1",
 							"protocol": "https",
 							"host": [
 								"acdisoftware",
@@ -247,7 +247,7 @@
 							"raw": "{\n    \"title\": \"Rapor hazırla\",\n    \"description\": \"Haftalık raporu hazırla ve yöneticiye gönder\",\n    \"status\": \"pending\",\n    \"priority\": \"high\",\n    \"due_date\": \"2025-05-10\",\n    \"category_ids\": [1, 2]\n}"
 						},
 						"url": {
-							"raw": "https://acdisoftware.com.tr/turkticaret/api/todos",
+							"raw": "https://acdisoftware.com.tr/turkticaret/todos",
 							"protocol": "https",
 							"host": [
 								"acdisoftware",
@@ -277,7 +277,7 @@
 							"raw": "{\n    \"title\": \"Rapor hazırla\",\n    \"description\": \"Haftalık raporu hazırla ve yöneticiye gönder\",\n    \"status\": \"in_progress\",\n    \"priority\": \"high\",\n    \"due_date\": \"2025-05-10\",\n    \"category_ids\": [1, 2]\n}"
 						},
 						"url": {
-							"raw": "https://acdisoftware.com.tr/turkticaret/api/todos/1",
+							"raw": "https://acdisoftware.com.tr/turkticaret/todos/1",
 							"protocol": "https",
 							"host": [
 								"acdisoftware",
@@ -308,7 +308,7 @@
 							"raw": "{\n    \"status\": \"completed\"\n}"
 						},
 						"url": {
-							"raw": "https://acdisoftware.com.tr/turkticaret/api/todos/1/status",
+							"raw": "https://acdisoftware.com.tr/turkticaret/todos/1/status",
 							"protocol": "https",
 							"host": [
 								"acdisoftware",
@@ -331,7 +331,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://acdisoftware.com.tr/turkticaret/api/todos/1",
+							"raw": "https://acdisoftware.com.tr/turkticaret/todos/1",
 							"protocol": "https",
 							"host": [
 								"acdisoftware",
@@ -353,7 +353,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://acdisoftware.com.tr/turkticaret/api/todos/search?q=rapor",
+							"raw": "https://acdisoftware.com.tr/turkticaret/todos/search?q=rapor",
 							"protocol": "https",
 							"host": [
 								"acdisoftware",
@@ -381,7 +381,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://acdisoftware.com.tr/turkticaret/api/todos/stats",
+							"raw": "https://acdisoftware.com.tr/turkticaret/todos/stats",
 							"protocol": "https",
 							"host": [
 								"acdisoftware",

@@ -21,22 +21,22 @@ Database::setConfig([
 ]);
 
 // Base path tanımı
-$basePath = '/turkticaret/api';
+$basePath = '/turkticaret';
 
 // Todo rotaları
 Router::get($basePath . '/todos', [TodoController::class, 'index']);
-Router::get($basePath . '/todos/{id}', [TodoController::class, 'show']);
 Router::post($basePath . '/todos', [TodoController::class, 'store']);
+Router::get($basePath . '/todos/search', [TodoController::class, 'search']);
+Router::get($basePath . '/stats/todos', [TodoController::class, 'stats']);
+Router::get($basePath . '/todos/{id}', [TodoController::class, 'show']);
 Router::put($basePath . '/todos/{id}', [TodoController::class, 'update']);
 Router::patch($basePath . '/todos/{id}/status', [TodoController::class, 'updateStatus']);
 Router::delete($basePath . '/todos/{id}', [TodoController::class, 'destroy']);
-Router::get($basePath . '/todos/search', [TodoController::class, 'search']);
-Router::get($basePath . '/stats/todos', [TodoController::class, 'stats']);
 
 // Kategori rotaları
 Router::get($basePath . '/categories', [CategoryController::class, 'index']);
-Router::get($basePath . '/categories/{id}', [CategoryController::class, 'show']);
 Router::post($basePath . '/categories', [CategoryController::class, 'store']);
+Router::get($basePath . '/categories/{id}', [CategoryController::class, 'show']);
 Router::put($basePath . '/categories/{id}', [CategoryController::class, 'update']);
 Router::delete($basePath . '/categories/{id}', [CategoryController::class, 'destroy']);
 Router::get($basePath . '/categories/{id}/todos', [CategoryController::class, 'todos']);

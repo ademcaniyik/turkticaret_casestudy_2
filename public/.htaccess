@@ -8,11 +8,9 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php [QSA,L]
 
-# Force /api prefix for all API routes
-RewriteCond %{REQUEST_URI} !^/turkticaret/api/ [NC]
-RewriteCond %{REQUEST_URI} ^/turkticaret/(categories|todos)/ [NC,OR]
-RewriteCond %{REQUEST_URI} ^/turkticaret/(categories|todos)$ [NC]
-RewriteRule ^(.*)$ /turkticaret/api/$1 [L,R=301]
+# Allow HTTP methods
+RewriteCond %{REQUEST_METHOD} ^(POST|PUT|DELETE|PATCH) [NC]
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
 # Handle HTTPS redirect
 RewriteCond %{HTTPS} off

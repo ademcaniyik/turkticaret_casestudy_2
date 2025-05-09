@@ -128,12 +128,23 @@ class Router
                         $middlewareInstance->handle();
                     }
 
+                    // Get request body for POST, PUT, PATCH methods
+                    $data = [];
+                    if (in_array($method, ['POST', 'PUT', 'PATCH'])) {
+                        $input = file_get_contents('php://input');
+                        $data = json_decode($input, true) ?? [];
+                    }
+
                     if (is_callable($route['handler'])) {
-                        call_user_func($route['handler'], $params);
+                        call_user_func($route['handler'], $params, $data);
                     } else {
                         [$controller, $method] = $route['handler'];
                         $controllerInstance = new $controller();
-                        call_user_func([$controllerInstance, $method], $params);
+                        if (in_array($method, ['store', 'update'])) {
+                            call_user_func([$controllerInstance, $method], $params, $data);
+                        } else {
+                            call_user_func([$controllerInstance, $method], $params);
+                        }
                     }
                     return;
                 }

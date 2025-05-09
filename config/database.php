@@ -2,7 +2,7 @@
 
 return [
     'host' => 'localhost:3306',
-    'database' => 'turkticaret',
+    'database' => 'acd1f4ftwarecom_turkticaret',
     'username' => 'acd1f4ftwarecom_root',
     'password' => "acdi'root321.",
     'charset' => 'utf8mb4',

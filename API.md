@@ -3,7 +3,7 @@
 ## Base URL
 
 ```plaintext
-https://acdisoftware.com.tr/turkticaret/api
+https://acdisoftware.com.tr/turkticaret
 ```
 
 ## Kategoriler (Categories)
