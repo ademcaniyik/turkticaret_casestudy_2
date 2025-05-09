@@ -11,8 +11,11 @@ abstract class Model
     protected array $original = [];
     protected array $fillable = [];
 
-    public function __construct(array $attributes = [])
+    public function __construct(?array $attributes = [])
     {
+        if (is_object($attributes)) {
+            $attributes = (array) $attributes;
+        }
         $this->fill($attributes);
         $this->original = $this->attributes;
     }
@@ -53,10 +56,8 @@ abstract class Model
         $query = new QueryBuilder(static::$table);
 
         if (isset($this->attributes['id'])) {
-            // Update
             $result = $query->where('id', '=', $this->attributes['id'])->update($this->attributes);
         } else {
-            // Insert
             $id = $query->insert($this->attributes);
             if ($id) {
                 $this->attributes['id'] = $id;
@@ -79,8 +80,8 @@ abstract class Model
             return false;
         }
 
-        $query = new QueryBuilder(static::$table);
-        return (bool) $query->where('id', '=', $this->attributes['id'])->delete();
+        $this->attributes['deleted_at'] = date('Y-m-d H:i:s');
+        return $this->save();
     }
 
     public static function query(): QueryBuilder
@@ -96,8 +97,10 @@ abstract class Model
 
     public static function all(): array
     {
-        $results = static::query()->get();
-        return array_map(fn($item) => new static($item), $results);
+        $query = static::query();
+        $results = $query->get();
+        $arrayResults = array_map('get_object_vars', $results->toArray());
+        return array_map(fn($item) => new static($item), $arrayResults);
     }
 
     public static function create(array $attributes): static
@@ -107,31 +110,26 @@ abstract class Model
         return $model;
     }
 
-    public static function paginate(int $page = 1, int $perPage = 10, array $filters = [], string $sortBy = null, string $sortOrder = 'ASC'): array
+    public static function paginate(int $page = 1, int $perPage = 10, array $filters = [], ?string $sortBy = null, ?string $sortOrder = 'ASC'): array
     {
         $query = static::query();
 
-        // Filtreleri uygula
         foreach ($filters as $column => $value) {
             if ($value !== null && $value !== '') {
                 $query->where($column, '=', $value);
             }
         }
 
-        // Sıralama uygula
         if ($sortBy) {
             $query->orderBy($sortBy, $sortOrder);
         }
 
-        // Toplam kayıt sayısını al
         $total = $query->count();
 
-        // Sayfalama uygula
         $query->limit($perPage)
               ->offset(($page - 1) * $perPage);
 
-        // Sonuçları al
-        $items = array_map(fn($item) => new static($item), $query->get());
+        $items = array_map(fn($item) => new static($item), $query->get()->toArray());
 
         return [
             'data' => $items,

@@ -40,7 +40,8 @@ class Response
             $response['errors'] = $errors;
         }
 
-        self::json(null, 'error', $message, $code);
+        echo json_encode($response);
+        exit;
     }
 
     public static function validationError(array $errors): void

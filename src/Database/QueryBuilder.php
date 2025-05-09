@@ -170,6 +170,33 @@ class QueryBuilder
         return (int) Database::getConnection()->lastInsertId();
     }
 
+    public function insertMultiple(array $data): bool
+    {
+        if (empty($data)) {
+            return true;
+        }
+
+        $firstRow = reset($data);
+        $columns = array_keys($firstRow);
+        $placeholders = array_fill(0, count($columns), '?');
+        $valueSets = array_fill(0, count($data), "(" . implode(", ", $placeholders) . ")");
+
+        $sql = sprintf(
+            "INSERT INTO %s (%s) VALUES %s",
+            $this->table,
+            implode(", ", $columns),
+            implode(", ", $valueSets)
+        );
+
+        $values = [];
+        foreach ($data as $row) {
+            $values = array_merge($values, array_values($row));
+        }
+
+        $stmt = Database::getConnection()->prepare($sql);
+        return $stmt->execute($values);
+    }
+
     public function update(array $data): int
     {
         $sets = [];
@@ -202,9 +229,7 @@ class QueryBuilder
         }
 
         $stmt = Database::getConnection()->prepare($sql);
-        $stmt->execute($values);
-
-        return $stmt->rowCount();
+        return $stmt->execute($values);
     }
 
     public function delete(): int

@@ -46,91 +46,96 @@ class TodoController
         Response::json($result['data'], 'success', null, 200, $result['meta']);
     }
 
-    public function show(array $params): void
+    public function show(array $params): ?Todo
     {
         $todo = Todo::find($params['id']);
         if (!$todo) {
             Response::json(null, 'error', 'Todo not found', 404);
-            return;
+            return null;
         }
 
-        $todo->categories = $todo->getCategories();
-        Response::json($todo);
+        $categories = $todo->getCategories();
+        Response::json(['data' => $todo, 'categories' => $categories]);
+        return $todo;
     }
 
-    public function store(array $data): void
+    public function store(array $data): ?Todo
     {
         $validation = $this->validator->make($data, [
-            'title' => 'required|min:3',
-            'description' => 'required|min:10',
-            'status' => 'required|in:pending,in_progress,completed,cancelled',
-            'priority' => 'required|in:low,medium,high',
-            'due_date' => 'required|date',
+            'title' => 'required|string|max:255',
+            'description' => 'string|max:1000',
+            'status' => 'in:pending,in_progress,completed',
+            'priority' => 'in:low,medium,high',
+            'due_date' => 'date_format:Y-m-d H:i:s',
             'category_ids' => 'array',
-            'category_ids.*' => 'integer'
+            'category_ids.*' => 'integer|exists:categories,id'
         ]);
 
         $validation->validate();
 
         if ($validation->fails()) {
-            Response::json($validation->errors()->all(), 'error', 'Validation failed', 422);
-            return;
+            Response::json(['errors' => $validation->errors()->all()], 'error', 'Validation failed', 422);
+            return null;
         }
 
-        $todo = Todo::create($data);
+        $todo = new Todo($data);
+        $todo->save();
 
-        if (isset($data['category_ids'])) {
+        if (isset($data['category_ids']) && is_array($data['category_ids'])) {
             $todo->setCategories($data['category_ids']);
         }
 
-        Response::json($todo, 'success', 'Todo created successfully', 201);
+        Response::json($todo, 'Todo created successfully');
+        return $todo;
     }
 
-    public function update(array $params, array $data): void
+    public function update(int $id, array $data): ?Todo
     {
-        $todo = Todo::find($params['id']);
+        $todo = Todo::find($id);
         if (!$todo) {
-            Response::json(null, 'error', 'Todo not found', 404);
-            return;
+            Response::json(null, 'Todo not found', null, 404);
+            return null;
         }
 
         $validation = $this->validator->make($data, [
-            'title' => 'min:3',
-            'description' => 'min:10',
-            'status' => 'in:pending,in_progress,completed,cancelled',
-            'priority' => 'in:low,medium,high',
-            'due_date' => 'date',
-            'category_ids' => 'array',
-            'category_ids.*' => 'integer'
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string|max:1000',
+            'status' => 'required|in:pending,in_progress,completed',
+            'priority' => 'required|in:low,medium,high',
+            'due_date' => 'nullable|date_format:Y-m-d H:i:s',
+            'category_ids' => 'nullable|array',
+            'category_ids.*' => 'integer|exists:categories,id'
         ]);
 
         $validation->validate();
 
         if ($validation->fails()) {
-            Response::json($validation->errors()->all(), 'error', 'Validation failed', 422);
-            return;
+            Response::json(null, 'Validation failed', $validation->errors()->first(), 422);
+            return null;
         }
 
         $todo->fill($data);
         $todo->save();
 
-        if (isset($data['category_ids'])) {
+        if (isset($data['category_ids']) && is_array($data['category_ids'])) {
             $todo->setCategories($data['category_ids']);
         }
 
         Response::json($todo, 'success', 'Todo updated successfully');
+        return true;
     }
 
-    public function destroy(array $params): void
+    public function delete(int $id): bool
     {
-        $todo = Todo::find($params['id']);
+        $todo = Todo::find($id);
         if (!$todo) {
-            Response::json(null, 'error', 'Todo not found', 404);
-            return;
+            Response::json(null, 'Todo not found', null, 404);
+            return false;
         }
 
         $todo->delete();
-        Response::json(null, 'success', 'Todo deleted successfully');
+        Response::json(null, 'Todo deleted successfully', null, 204);
+        return true;
     }
 
     public function search(array $params): void
@@ -144,10 +149,11 @@ class TodoController
         Response::json($todos);
     }
 
-    public function stats(): void
+    public function stats(): array
     {
         $stats = Todo::getStats();
         Response::json($stats);
+        return $stats;
     }
 
     public function updateStatus(array $params, array $data): void

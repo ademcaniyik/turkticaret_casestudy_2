@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Database\QueryBuilder;
-
 class Todo extends Model
 {
     protected static string $table = 'todos';
@@ -24,18 +22,21 @@ class Todo extends Model
             ->join('todo_category', 'categories.id', '=', 'todo_category.category_id')
             ->where('todo_category.todo_id', '=', $this->id);
 
-        return array_map(fn($item) => new Category($item), $query->get());
+        $results = $query->get();
+        $arrayResults = array_map('get_object_vars', $results->toArray());
+        return array_map(fn($item) => new Category($item), $arrayResults);
     }
 
     public function setCategories(array $categoryIds): void
     {
-        // Önce mevcut ilişkileri silelim
+        if (empty($categoryIds)) {
+            return;
+        }
+
         $query = new QueryBuilder('todo_category');
         $query->where('todo_id', '=', $this->id)->delete();
 
-        // Yeni ilişkileri ekleyelim
         foreach ($categoryIds as $categoryId) {
-            $query = new QueryBuilder('todo_category');
             $query->insert([
                 'todo_id' => $this->id,
                 'category_id' => $categoryId
@@ -43,61 +44,40 @@ class Todo extends Model
         }
     }
 
-    public function delete(): bool
-    {
-        if (!isset($this->attributes['id'])) {
-            return false;
-        }
-
-        $this->attributes['deleted_at'] = date('Y-m-d H:i:s');
-        return $this->save();
-    }
-
     public static function search(string $term): array
     {
-        $query = self::query()
-            ->where('deleted_at', 'IS', 'NULL')
+        $query = static::query()
             ->where('title', 'LIKE', "%{$term}%")
             ->orWhere('description', 'LIKE', "%{$term}%");
 
-        return array_map(fn($item) => new static($item), $query->get());
+        $results = $query->get();
+        $arrayResults = array_map('get_object_vars', $results->toArray());
+        return array_map(fn($item) => new static($item), $arrayResults);
     }
 
     public static function all(): array
     {
-        $results = static::query()
-            ->where('deleted_at', 'IS', 'NULL')
-            ->get();
-        return array_map(fn($item) => new static($item), $results);
+        $query = static::query()
+            ->where('deleted_at', 'IS', null);
+
+        $results = $query->get();
+        $arrayResults = array_map('get_object_vars', $results->toArray());
+        return array_map(fn($item) => new static($item), $arrayResults);
     }
 
     public static function getStats(): array
     {
-        $stats = [
-            'pending' => 0,
-            'in_progress' => 0,
-            'completed' => 0,
-            'cancelled' => 0,
-            'total' => 0,
-            'overdue' => 0
-        ];
+        $query = static::query()
+            ->select([
+                'status',
+                'priority',
+                'COUNT(*) as count'
+            ])
+            ->where('deleted_at', 'IS', null)
+            ->groupBy('status', 'priority');
 
-        // Status dağılımını al
-        $query = self::query()
-            ->select(['status', 'COUNT(*) as count'])
-            ->groupBy('status');
-
-        foreach ($query->get() as $row) {
-            $stats[$row['status']] = (int) $row['count'];
-            $stats['total'] += (int) $row['count'];
-        }
-
-        // Gecikmiş todo'ları say
-        $stats['overdue'] = self::query()
-            ->where('due_date', '<', date('Y-m-d H:i:s'))
-            ->where('status', 'NOT IN', ['completed', 'cancelled'])
-            ->count();
-
-        return $stats;
+        $results = $query->get();
+        $arrayResults = array_map('get_object_vars', $results->toArray());
+        return array_map(fn($item) => new static($item), $arrayResults);
     }
 }

@@ -8,8 +8,12 @@ use RuntimeException;
 
 class Database
 {
-    private static array $config;
-    private static PDO $connection;
+    private static ?PDO $instance = null;
+    private static ?array $config = null;
+
+    private function __construct()
+    {
+    }
 
     public static function setConfig(array $config): void
     {
@@ -18,16 +22,14 @@ class Database
 
     public static function getConnection(): PDO
     {
-        if (!isset(self::$connection)) {
-            $dsn = sprintf(
-                'mysql:host=%s;dbname=%s;charset=utf8mb4',
-                self::$config['host'],
-                self::$config['database']
-            );
+        if (self::$instance === null) {
+            if (self::$config === null) {
+                throw new RuntimeException('Database configuration not set');
+            }
 
             try {
-                self::$connection = new PDO(
-                    $dsn,
+                self::$instance = new PDO(
+                    "mysql:host=" . self::$config['host'] . ";dbname=" . self::$config['dbname'] . ";charset=utf8mb4",
                     self::$config['username'],
                     self::$config['password'],
                     [
@@ -37,10 +39,10 @@ class Database
                     ]
                 );
             } catch (PDOException $e) {
-                throw new RuntimeException('Database connection failed: ' . $e->getMessage());
+                throw new RuntimeException("Connection failed: " . $e->getMessage());
             }
         }
 
-        return self::$connection;
+        return self::$instance;
     }
 }

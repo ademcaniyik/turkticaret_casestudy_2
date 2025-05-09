@@ -9,7 +9,6 @@ class Category extends Model
     protected array $fillable = [
         'name',
         'description',
-        'color',
         'deleted_at'
     ];
 
@@ -18,9 +17,12 @@ class Category extends Model
         $query = Todo::query()
             ->select(['todos.*'])
             ->join('todo_category', 'todos.id', '=', 'todo_category.todo_id')
-            ->where('todo_category.category_id', '=', $this->id);
+            ->where('todo_category.category_id', '=', $this->id)
+            ->where('todos.deleted_at', 'IS', null);
 
-        return array_map(fn($item) => new Todo($item), $query->get());
+        $results = $query->get();
+        $arrayResults = array_map('get_object_vars', $results->toArray());
+        return array_map(fn($item) => new Todo($item), $arrayResults);
     }
 
     public static function getWithTodoCount(): array
@@ -31,6 +33,8 @@ class Category extends Model
                 '(SELECT COUNT(*) FROM todo_category WHERE todo_category.category_id = categories.id) as todo_count'
             ]);
 
-        return array_map(fn($item) => new static($item), $query->get());
+        $results = $query->get();
+        $arrayResults = array_map('get_object_vars', $results->toArray());
+        return array_map(fn($item) => new static($item), $arrayResults);
     }
 }
