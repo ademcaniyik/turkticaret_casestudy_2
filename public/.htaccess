@@ -1,5 +1,8 @@
 RewriteEngine On
 
+# Test if .htaccess is working
+RewriteRule ^test$ test.php [L]
+
 # Set base path
 RewriteBase /
 
