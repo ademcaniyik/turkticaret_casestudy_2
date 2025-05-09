@@ -29,7 +29,7 @@ App\Database\Database::setConfig([
 ]);
 
 // Initialize router
-App\Helpers\Router::group('/turkticaret/public', function() {
+App\Helpers\Router::group('/', function() {
     // Define routes
     App\Helpers\Router::get('/todos', [App\Controllers\TodoController::class, 'index']);
     App\Helpers\Router::get('/todos/{id}', [App\Controllers\TodoController::class, 'show']);
