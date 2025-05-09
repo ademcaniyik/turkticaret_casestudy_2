@@ -3,6 +3,10 @@ RewriteEngine On
 # Test if .htaccess is working
 RewriteRule ^test$ test.php [L]
 
+# Remove public from URL
+RewriteCond %{REQUEST_URI} ^/public/(.*)$ [NC]
+RewriteRule ^(.*)$ /%1 [R=301,L]
+
 # Set base path
 RewriteBase /
 
