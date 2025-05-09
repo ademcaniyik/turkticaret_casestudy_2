@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'host' => 'localhost:3306',
+    'host' => 'localhost',
     'database' => 'acd1f4ftwarecom_turkticaret',
     'username' => 'acd1f4ftwarecom_root',
     'password' => "acdi'root321.",
